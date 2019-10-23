@@ -1,3 +1,6 @@
 using Unity.Entities;
 
-public struct PlayerComponent : IComponentData { }
+public struct PlayerComponent : IComponentData
+{
+    int id;
+}
