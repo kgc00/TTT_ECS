@@ -24,7 +24,6 @@ public class PieceSpawner : MonoBehaviour
         {
             Instance = this;
         }
-        Debug.Log(Instance);
         manager = World.Active.EntityManager;
         pieceArchetype = manager.CreateArchetype(
             typeof(Translation),
@@ -34,12 +33,19 @@ public class PieceSpawner : MonoBehaviour
         );
     }
 
-    public void SpawnPiece(Translation translation)
+    public void SpawnPiece(Translation translation, Players activePlayer)
     {
         float3 spawnPos = translation.Value;
         spawnPos.z -= 0.1f;
         var entity = manager.CreateEntity(pieceArchetype);
         manager.SetComponentData(entity, new Translation { Value = spawnPos });
-        manager.SetSharedComponentData(entity, new RenderMesh { material = material, mesh = mesh });
+        if (activePlayer == Players.PLAYER_ONE)
+        {
+            manager.SetSharedComponentData(entity, new RenderMesh { material = material, mesh = mesh });
+        }
+        else
+        {
+            manager.SetSharedComponentData(entity, new RenderMesh { material = material2, mesh = mesh2 });
+        }
     }
 }

@@ -14,15 +14,15 @@ public class BoardCreator : MonoBehaviour
     void Start()
     {
         EntityManager manager = World.Active.EntityManager;
-        EntityArchetype boardArchetype, pieceArchetype, playerArchetype, tileArchetype;
-        DefineArchetypes(manager, out boardArchetype, out pieceArchetype, out playerArchetype, out tileArchetype);
+        EntityArchetype boardArchetype, pieceArchetype, tileArchetype;
+        DefineArchetypes(manager, out boardArchetype, out pieceArchetype, out tileArchetype);
         SpawnBoard(manager, boardArchetype, tileArchetype);
     }
 
     private void SpawnBoard(EntityManager manager, EntityArchetype boardArchetype, EntityArchetype tileArchetype)
     {
         var board = manager.CreateEntity(boardArchetype);
-        // SpawnBoardBackground (manager);
+        SpawnBoardBackground(manager);
         SpawnBoardTiles(manager, tileArchetype, board);
     }
 
@@ -67,7 +67,6 @@ public class BoardCreator : MonoBehaviour
         EntityManager manager,
         out EntityArchetype boardArchetype,
         out EntityArchetype pieceArchetype,
-        out EntityArchetype playerArchetype,
         out EntityArchetype tileArchetype)
     {
         boardArchetype = manager.CreateArchetype(
@@ -82,15 +81,11 @@ public class BoardCreator : MonoBehaviour
             typeof(LocalToWorld),
             typeof(PieceComponent)
         );
-        playerArchetype = manager.CreateArchetype(
-            typeof(PlayerComponent)
-        );
         tileArchetype = manager.CreateArchetype(
             typeof(Translation),
             typeof(RenderMesh),
             typeof(LocalToWorld),
-            typeof(TileComponent),
-            typeof(TargetableComponent)
+            typeof(TileComponent)
         );
     }
 }
