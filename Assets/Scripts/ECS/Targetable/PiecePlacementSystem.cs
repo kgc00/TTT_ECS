@@ -54,6 +54,7 @@ public class PiecePlacementSystem : ComponentSystem {
 
     private bool EntitySelected (Translation translation, float3 mouseWorldPos) {
         var gridSize = 0.55f;
+        // AABB algorithm
         if (translation.Value.x < mouseWorldPos.x + gridSize &&
             translation.Value.x > mouseWorldPos.x - gridSize) {
             if (translation.Value.y < mouseWorldPos.y + gridSize &&
