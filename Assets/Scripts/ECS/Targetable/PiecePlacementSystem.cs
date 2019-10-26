@@ -9,7 +9,9 @@ public class PiecePlacementSystem : ComponentSystem
 {
     protected override void OnUpdate()
     {
-        if (Input.GetMouseButtonDown(0))
+        GameComponent gameComponent = AccessGameComponent();
+
+        if (Input.GetMouseButtonDown(0) && gameComponent.state == GameState.IN_PROGRESS)
         {
             float3 mouseWorldPos = Camera.main.ScreenToWorldPoint(
             new float3(
@@ -26,8 +28,6 @@ public class PiecePlacementSystem : ComponentSystem
                 if (EntitySelected(translation, mouseWorldPos, gridSize))
                 {
                     if (tile.occupier != Players.NONE) return;
-
-                    GameComponent gameComponent = AccessGameComponent();
 
                     UpdateGameState();
                     tile.occupier = gameComponent.activePlayer;

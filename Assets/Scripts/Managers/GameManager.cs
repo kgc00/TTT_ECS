@@ -22,6 +22,6 @@ public class GameManager : MonoBehaviour
     {
         var startingPlayer = (Players)UnityEngine.Random.Range(1, 3);
         var entity = manager.CreateEntity(gameArchetype);
-        manager.SetComponentData(entity, new GameComponent { activePlayer = startingPlayer, state = GameState.NOT_STARTED });
+        manager.SetComponentData(entity, new GameComponent { activePlayer = startingPlayer, state = GameState.IN_PROGRESS });
     }
 }

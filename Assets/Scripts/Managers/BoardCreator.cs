@@ -42,7 +42,7 @@ public class BoardCreator : MonoBehaviour
             {
                 var entity = manager.CreateEntity(tileArchetype);
                 manager.SetComponentData(entity, new Translation { Value = new float3(i * spacing - offset, j * spacing - offset, 0) });
-                manager.SetComponentData(entity, new TileComponent { occupier = Players.NONE });
+                manager.SetComponentData(entity, new TileComponent { occupier = Players.NONE, posX = i, posY = j });
                 manager.SetSharedComponentData(entity, new RenderMesh { material = material, mesh = mesh });
             }
         }
